@@ -8,6 +8,16 @@ class Q3
         obj.go();
     }
     long t1,t2;
+    boolean containsBad(String str)
+    {
+        int i,l=str.length();
+        for(i=0;i<l;i++)
+        {
+            if(!nonTerminal(str.charAt(i)))
+            return true;
+        }
+        return false;
+    }
     public void go()throws IOException
     {
         BufferedReader br1=new BufferedReader(new FileReader("a.txt"));
@@ -39,8 +49,12 @@ class Q3
         int line=0;
         Queue<String> q=new LinkedList<>();
         ArrayList<String> dfsSources=new ArrayList<>();
+        HashSet<String> epsilonAble=new HashSet<>();
+        HashSet<String> notEpsilonAble=new HashSet<>();
         while((str=br1.readLine())!=null)
         {
+            if(str.length()>15)
+            break;
             l=str.indexOf("->");
             String left=str.substring(0,l).trim();
             String right=str.substring(l+2).trim();
@@ -57,17 +71,68 @@ class Q3
                 al.add(token[i]);
             }
             rules.put(left,al);
-            System.out.print(left+","+al.toString());
-            System.out.println();
+        }
+        ArrayList<String> keys = new ArrayList<>(rules.keySet());
+        for(int k=0;k<keys.size();k++)
+        {
+            if(epsilonAble.size()+notEpsilonAble.size()==rules.size())
+            break;
+            String left=keys.get(k);
+            ArrayList<String> al=rules.get(left);
+            //System.out.println("Time for rule: "+left);
+            boolean done=false;
+            int count=0,epsCount=0;
+            for(String s:al)
+            {
+                if(s.equals("@"))
+                {
+                    epsilonAble.add(left);
+                    done=true;
+                    break;
+                }
+                else if(containsBad(s))
+                {
+                    count++;
+                    continue;
+                }
+                else
+                {
+                    for(int r=0;r<s.length();r++)
+                    {
+                        if(epsilonAble.contains(s.charAt(r)+""))
+                        {
+                            epsCount++;
+                        }
+                        else if(notEpsilonAble.contains(s.charAt(r)+""))
+                        {
+                            count++;
+                            break;
+                        }
+                    }
+                    if(epsCount==s.length())
+                    {
+                        epsilonAble.add(left);
+                        done=true;
+                        break;
+                    }
+                }
+            }
+            if(count==al.size())
+            {
+                done=true;
+                notEpsilonAble.add(left);
+            }
+            if(!done)
+            keys.add(left);
         }
         str=br.readLine();
         t1=System.nanoTime();
-        bfs(q,str,rules);
+        bfs(q,str,rules,epsilonAble,notEpsilonAble);
         //Call dfs from all start productions. If it succeeds, System.exit() prevents other calls.
         for(String s:dfsSources)
         {
             t1=System.nanoTime();
-            dfs(str,s,rules,new HashSet<String>());
+            dfs(str,s,rules,new HashSet<String>(),epsilonAble,notEpsilonAble);
         }
         t2=System.nanoTime();
         System.out.println("Failed DFS took: "+(((t2-t1)*(1.0))/1000)+" microsecends");
@@ -76,29 +141,19 @@ class Q3
     {
         return ch>=65&&ch<=90;
     }
-    boolean valid(String str, String target)
+    boolean valid(String str, String target,HashSet<String> e,HashSet<String> nE)
     {
         int count=0,i,l=str.length(),l1=target.length(),j;
         for(i=0;i<l;i++)
-        if(nonTerminal(str.charAt(i)))
+        if(nonTerminal(str.charAt(i))&&e.contains(str.charAt(i)+""))
         count++;
-        //System.out.println("Validator: "+str+" , Count: "+count);
         if(target.length()<str.length()-count)
         return false;
-        /*for(i=0,j=0;i<l&&j<l1;i++)
-        {
-            if(nonTerminal(str.charAt(i)))
-            continue;
-            if(str.charAt(i)!=target.charAt(j))
-            return false;
-            j++;
-        }*/
         return true;
     }
-    void dfs(String target, String formed, HashMap<String,ArrayList<String>> rules, HashSet<String> visited)
+    void dfs(String target, String formed, HashMap<String,ArrayList<String>> rules, HashSet<String> visited,HashSet<String> e,HashSet<String> nE)
     {
         int i,l;
-        //System.out.println("Formed is: "+formed);
         if(formed.equals(target))
         {
             t2=System.nanoTime();
@@ -119,25 +174,22 @@ class Q3
                     if(s.equals("@"))
                     s="";
                     String possible=formed.substring(0,i)+s+formed.substring(i+1);                    
-                    //Add conditions
-                    if(valid(possible,target)&&!visited.contains(possible))
+                    if(valid(possible,target,e,nE)&&!visited.contains(possible))
                     {
-                        //System.out.println(formed+"--->"+possible);
                         visited.add(possible);
-                        dfs(target,possible,rules,visited);
+                        dfs(target,possible,rules,visited,e,nE);
                     }
                 }
             }
         }
     }
-    void bfs(Queue<String> q,String target, HashMap<String,ArrayList<String>> rules)
+    void bfs(Queue<String> q,String target, HashMap<String,ArrayList<String>> rules,HashSet<String> e,HashSet<String> nE)
     {
         int i,l;
         HashSet<String> visited=new HashSet<>();
         while(!q.isEmpty())
         {
             String str=q.poll();
-            //System.out.println(str);
             visited.add(str);
             if(str.equals(target))
             {
@@ -158,8 +210,7 @@ class Q3
                          if(s.equals("@"))
                          s="";
                          String possible=str.substring(0,i)+s+str.substring(i+1);
-                         //Add conditions
-                         if(valid(possible,target)&&!visited.contains(possible))
+                         if(valid(possible,target,e,nE)&&!visited.contains(possible))
                          {
                              //System.out.println("Will explore: "+str+"--->"+target+", on applying rule: "+ch+"->"+((s.length()==0)?"@":s));
                              q.add(possible);
@@ -168,7 +219,6 @@ class Q3
                      }
                 }
             }
-            //System.out.println(q.toString());
         }
         t2=System.nanoTime();
         System.out.println("BFS took: "+(((t2-t1)*(1.0))/1000)+" microsecends");

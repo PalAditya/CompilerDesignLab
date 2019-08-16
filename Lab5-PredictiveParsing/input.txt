@@ -1,0 +1,35 @@
+prog
+            int i;
+            int j;
+            int sum;
+            int count;
+           
+            sum:=0;
+            count:=5;
+ 
+            scan count      
+            print sum
+           
+            if count=3
+            then sum:=2;
+            else
+                        if count < 4
+                        then sum:=2.3;
+                        end
+                       
+                        while count>2.3
+                        do sum:=sum-1;
+                        end
+            end
+           
+            while sum > 0
+            do
+                        count:=count+1;
+                        i := 1.2345;
+                       
+                        if count=3
+                        then sum:=2;
+                        end
+            end
+ 
+end

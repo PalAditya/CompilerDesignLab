@@ -23,4 +23,4 @@ Fianlly, the object is called and it proceeds as question 1.
 
 You can use the rMap maps in the Q2_5.java to reverse the symbols back.
 
-**AugmentedFirstAndFollow.java** removess the limitations of 'character-only' tokens of **FirstAndFollow.java** and can handle left-recursive grammars too. Also, it's more object-oriented.
+**AugmentedFirstAndFollow.java** removes the limitations of 'character-only' tokens of **FirstAndFollow.java** and can handle left-recursive grammars too. Also, it's more object-oriented.

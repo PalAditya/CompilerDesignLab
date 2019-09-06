@@ -5,15 +5,17 @@ You can get the source code by using **gcc -S filename**
 **Note**: ssort is an 8085 assembly code for selection sort, included for comparison purposes only.
 
 Explanation for *lab8.s (basic)*:
-|Line | Work |
+
+| Line | Work |
 | ------------- | ------------- |
-|Lines 1-3 | Definition|
-| Line 5  | The .ascii directive places the characters in string into the object module at the current location |
-| Line 10 | scl 2 means storage class 2(external storage class), and 32 refers to a function|
-| Line 11 | main start |
-| Line 17 | assigns the stack pointer to ebp register|
-| Line 21 | main is called|
-|Line 22 to 32| We assign elements of the array to memory locations, based on offset from esp pointer|
+Lines 1-3 | Definition
+Line 5  | The .ascii directive places the characters in string into the object module at the current location
+Line 10 | scl 2 means storage class 2(external storage class), and 32 refers to a function
+Line 11 | main start
+Line 17 | assigns the stack pointer to ebp register
+Line 21 | main is called
+Line 22 to 32| We assign elements of the array to memory locations, based on offset from esp pointer
+
 It then moves to the for loops
 
 |Line | Work |

@@ -1,0 +1,38 @@
+;<Selection-sort>
+jmp start
+;data
+arr: db 9,2,3,17,1,6,12,8
+;code
+start: nop
+lda 4000;assuming array length is in 4000
+mov b,a
+mov c,a;
+sta 4001;store this as we need to decrement it
+outer_loop: mvi h,0;max
+lxi d,arr;de can point to arr[0] now
+inner_loop: ldax d;store arr[j] in accumulator
+cmp h;compare with max
+jc deincrement
+mov h,a;max=arr[j] if needed
+xchg;swap de with hl
+shld 4002;//save the index
+xchg;reswap
+deincrement: inr e;point to next element
+dcr c
+jnz inner_loop
+lda 4001
+dcr a
+mov c,a
+sta 4001;inner loop decremented
+dcr e;pointing to last element to access
+xchg;swap, d again has max value
+mov a,m;got value of last element
+mov e,a;e is temp
+mov a,d;a has max value
+mov m,a;overwrote last element
+lhld 4002;get back index
+mov a,e
+mov m,a;swapping done
+dcr b;
+jnz outer_loop
+hlt

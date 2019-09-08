@@ -1,5 +1,6 @@
 # Parser_Library: An easy-to-use library to quickly debug your work.
 
+Currently supported parsers: *LR0*, *SLR*, *LR1* and *LALR* parsers.  
 A basic usage of the library is as easy as follows:
 
 ```java
@@ -38,5 +39,27 @@ parse|void|Parses the string using the generated table
 getIndex|int|Returns the index of the state, or -1 if a new state
 pretty_it|void|Formatting
 print_transitions|void|Prints all transitions
+
+You can either clone the repository here for a minimal usage, or download it from maven, with full documentation and junit tests.
+
+For **release** build:
+
+```java
+<dependency>
+  <groupId>io.github.PalAditya</groupId>
+  <artifactId>parser-library</artifactId>
+  <version>0.1.1</version>
+</dependency>
+```
+
+For **snapshot** build:
+
+```java
+<dependency>
+  <groupId>io.github.PalAditya</groupId>
+  <artifactId>parser-library</artifactId>
+  <version>0.1-SNAPSHOT</version>
+</dependency>
+```
 
 More documentation coming soon!

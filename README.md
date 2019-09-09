@@ -10,7 +10,7 @@ A basic usage of the library is as easy as follows:
 LR1Parser obj=new LR1Parser();//Create an instance of the desired parser-In this case LR1 type parser
 obj.read_grammar("D://Documents/Lab4/LR0.txt");//Read the grammar file
 obj.buildDFA();//Build a dfa from the file
-System.out.println(states)//Prints the transitions in all states
+System.out.println(obj.states);//Prints the transitions in all states
 obj.print_transitions();//Print all the transitions
 obj.getParsingTable(true);//Use false to avoid printing the table after creation
 obj.parse("a c e",true);//Parse the string; use false to prevent the stack actions from displaying on screen
@@ -38,3 +38,5 @@ For **snapshot** build:
 ```
 
 In case you want the pre-release (latest) versions, you can download it manually from [here](https://oss.sonatype.org/content/repositories/central_bundles-18962/io/github/PalAditya/parser-library/0.1.1/)  
+
+**Note**: This is not being maintained anymore. Please see [here](!https://github.com/PalAditya/JParser) to get the latest version of the code.

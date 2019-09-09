@@ -36,3 +36,5 @@ For **snapshot** build:
   <version>0.1-SNAPSHOT</version>
 </dependency>
 ```
+
+In case you want the pre-release (latest) versions, you can download it manually from [here](https://oss.sonatype.org/content/repositories/central_bundles-18962/io/github/PalAditya/parser-library/0.1.1/)  

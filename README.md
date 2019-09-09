@@ -39,4 +39,4 @@ For **snapshot** build:
 
 In case you want the pre-release (latest) versions, you can download it manually from [here](https://oss.sonatype.org/content/repositories/central_bundles-18962/io/github/PalAditya/parser-library/0.1.1/)  
 
-**Note**: This is not being maintained anymore. Please see [here](!https://github.com/PalAditya/JParser) to get the latest version of the code.
+**Note**: This is not being maintained anymore. Please see [here](https://github.com/PalAditya/JParser) to get the latest version of the code.

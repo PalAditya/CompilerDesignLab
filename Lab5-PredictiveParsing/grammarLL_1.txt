@@ -2,4 +2,4 @@ E->FMN
 T->FM
 F->(E)|i
 M->*FM|@
-N->+TN|@
+N->+TN|@

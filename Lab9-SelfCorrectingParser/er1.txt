@@ -1,0 +1,28 @@
++ - * / = < > ( ) { } := ; and else end ic id if int do fc float not or print prog scan str then while
+P DL D TY VL U SL S ES IS V WS IOS PE BE X AE Y NE RE ZZ E Z T W F
+P -> prog DL SL end
+DL -> D DL | @
+D -> TY VL ;
+TY -> int | float
+VL -> id U
+U -> VL | @
+SL -> S SL | @
+S -> ES | IS | WS | IOS
+ES -> id := E ;
+IS -> if BE then SL V
+V -> else SL end | end
+WS -> while BE do SL end
+IOS -> print PE | scan id
+PE -> E | str
+BE -> AE X
+X-> or AE X | @
+AE -> NE Y
+Y -> and NE Y | @
+NE -> { BE } | not NE | RE
+RE -> E ZZ
+ZZ -> = E | < E | > E
+E -> T Z
+Z -> + T Z | - T Z | @
+T -> F W
+W -> * F W | / F W | @
+F -> ( E ) | id | ic | fc

@@ -57,7 +57,7 @@ B = 5 + A // Since the * nodes are expanded at a later stage, they come earlier 
 ```
 **Note**: Compilation
  - lex ast.l & yacc -d ast.y & gcc ast.tab.c  
--  lex 3address.l & yacc -d 3address.y & gcc lex.yy.c 3address.tab.c 
+-  lex 3address.l & yacc -d 3address.y & gcc lex.yy.c 3address.tab.c  (3address_1.y has a simpler version that prints symbols as it sees them and is probably more intuitive)
 
 Replace ast.tab.c and 3address.tab.c with y.tab.c on linux 😁 
 

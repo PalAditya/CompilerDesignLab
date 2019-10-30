@@ -1,0 +1,20 @@
+x = y + 5;
+z = x*2;
+a = x + z;
+print ABC;
+read %f zxc;
+while (awe > qwe)
+{
+	print qwe123 ;
+	jkl = qwe + 1;
+	qwe = qwe + 2;
+}
+if (awe != qwe ||  qwe + abc > 50 && abc == 10.234)
+{
+	print POI123QWE;
+}
+else
+{
+	print abc;
+	print lkj;
+}

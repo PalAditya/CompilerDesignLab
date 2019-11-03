@@ -30,7 +30,7 @@ int top=-1;
 		push(yytext);
 		return ID;
 		}
-
+[" "\t] {}
 . {return yytext[0];}
 \n {return 0;}
 
